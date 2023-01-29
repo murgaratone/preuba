@@ -1,0 +1,110 @@
+<div class="container-products">
+    <div class="table-active-create">
+            <div class="col-12">
+                <div class="container-header">
+                    <div class="title-form">
+                        <mat-icon (click)="back()" *ngIf="this.mode === 'edit'">chevron_left</mat-icon>
+                        <p>{{title}}</p>
+                    </div>
+                    <div *ngIf="this.mode != 'edit'">
+                        <button mat-raised-button
+                            [disabled]="this.mode === 'create'" color="primary" (click)="addProductButton()">
+                            <mat-icon>add</mat-icon>
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+                <div class="row container-add-new" *ngIf="this.mode === 'create' || this.mode === 'edit'">
+                    <div class="form-active-create col-11">
+                        <div *ngIf="formsProductsService.formProduct">
+                            <form #myFormProduct="ngForm" [formGroup]="formsProductsService.formProduct"
+                                class="form-table">
+                                <div class="row justify-content-right" style="margin: 0;">
+                                    <div class="col-sm-12 col-lg-3">
+                                        <mat-label class="label-input">
+                                            Nombre Producto</mat-label>
+                                        <mat-form-field class="col-12" appearance="outline">
+                                            <input matInput appAutofocus placeholder="" formControlName="name" 
+                                            type="text" class="inputOutline" 
+                                            [(ngModel)]="inputProductName" style="text-transform: uppercase">
+                                            <mat-error
+                                                *ngIf="formsProductsService.formProduct.get('name')?.hasError('required') && formsProductsService.formProduct.get('name')?.touched">
+                                                Este campo es obligatorio
+                                            </mat-error>
+                                            <mat-error
+                                                *ngIf="formsProductsService.formProduct.get('name')?.hasError('maxlength') && formsProductsService.formProduct.get('name')?.touched">
+                                                Deben ser máximo 20 caracteres
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-12 col-lg-3">
+                                        <mat-label class="label-input">Código</mat-label>
+                                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                                            <input matInput appAutofocus placeholder="" formControlName="code" 
+                                            type="text" class="inputOutline"
+                                            [(ngModel)]="inputProductCode" style="text-transform: uppercase">
+                                            <mat-error
+                                                *ngIf="formsProductsService.formProduct.get('code')?.hasError('required') && formsProductsService.formProduct.get('code')?.touched">
+                                                Este campo es requerido
+                                            </mat-error>
+                                            <mat-error
+                                                *ngIf="formsProductsService.formProduct.get('code')?.hasError('maxlength') && formsProductsService.formProduct.get('code')?.touched">
+                                                Deben ser máximo 10 caracteres
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-12 col-lg-3">
+                                        <mat-label class="label-input">Líquido</mat-label>
+                                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                                            <mat-select #isLiquid matNativeControl formControlName="isLiquid" required
+                                                class="inputOutline">
+                                                <mat-option *ngFor="let select of selectLiquid" [value]="select.liquid">
+                                                    {{select.liquid}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="formsProductsService.formProduct.get('isLiquid')?.hasError('required') && formsProductsService.formProduct.get('isLiquid')?.touched">
+                                                Este campo es requerido
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-12 col-lg-3">
+                                        <mat-label class="label-input">Estado</mat-label>
+                                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                                            <mat-select #status matNativeControl formControlName="status"
+                                                class="inputOutline" required>
+                                                <mat-option *ngFor="let item of statusList" [value]="item.status">
+                                                    {{item.status}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="formsProductsService.formProduct.get('status')?.hasError('required') && formsProductsService.formProduct.get('status')?.touched">
+                                                Este campo es requerido
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-1 container-button-save">
+                        <button mat-raised-button color="primary" (click)="saveProduct()" type="submit">
+                            <mat-icon color="secondary">save</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-table row" *ngIf="this.mode != 'edit'">
+                    <app-table [headers]="tableProductsService.headers" [data]="tableProductsService.data"
+                        [actions]="tableProductsService.actions" [totalPages]="tableProductsService.totalPages"
+                        [viewStatus]="tableProductsService.viewStatus" [actualPage]="tableProductsService.actualPage"
+                        [disableEditItemWithStatus]="tableProductsService.disableEditItemWithStatus"
+                        (edit)="tableProductsService.editProduct($event)" (back)="tableProductsService.backPage()"
+                        (next)="tableProductsService.nextPage()">
+                    </app-table>
+                </div>
+            </div>
+    </div>
+</div>

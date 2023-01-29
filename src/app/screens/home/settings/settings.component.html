@@ -1,0 +1,10 @@
+<div class="container-Settings">
+  <div class="menu-Settings">
+      <div *ngFor="let item of settingsMenu.children" [ngClass]="{ 'items': true,  'select': item.select}">
+          <div (click)="changeMenu(item)">{{item.text}}</div>
+      </div>
+  </div>
+  <div>
+      <router-outlet></router-outlet>
+  </div>
+</div>

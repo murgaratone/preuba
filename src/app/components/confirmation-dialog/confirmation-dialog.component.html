@@ -1,0 +1,22 @@
+<div class="container-dialog">
+  <div class="container-icon">
+    <img [src]="'../../../assets/img/' + img" alt="">
+  </div>
+  <div class="container-description">
+    <div class="container-text">
+      <h2 color="primary">{{data.title}}</h2>
+      <h3>{{data.text}}</h3>
+    </div>
+    <div class="container-buttons">
+      <button mat-raised-button color="primary" (click)="close()" *ngIf="!data.textButtonTwo">
+        {{data.textButton}}
+      </button>
+      <button mat-stroked-button color="primary" *ngIf="data.textButtonTwo" [mat-dialog-close]="{action:'cancel'}">
+        {{data.textButton}}
+      </button>
+      <button mat-raised-button color="primary" *ngIf="data.textButtonTwo" [mat-dialog-close]="{action:'accept'}">
+        {{data.textButtonTwo}}
+      </button>
+    </div>
+  </div>
+</div>

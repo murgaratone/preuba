@@ -1,0 +1,40 @@
+.container-dialog {
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+
+    .container-icon {
+        padding-bottom: 24px;
+        display: flex;
+        justify-content: center;
+        height: auto;
+
+        img {
+            width: 100px;
+        }
+    }
+
+    .container-description{
+        .container-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            *{
+                text-align: center;
+            }
+            
+        }
+        .container-buttons{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button {
+                width: 200px;
+                margin: 5px
+            };
+        }
+    }
+}

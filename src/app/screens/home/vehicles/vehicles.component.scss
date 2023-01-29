@@ -1,0 +1,74 @@
+@import "../../../../themes/theme.scss";
+
+.container-vehicle {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+
+    .title-form{
+        display: flex;
+        justify-content: left;
+        margin-bottom: 20px;
+        align-items: center;
+        color: map-get($theme-default, "primary");
+        width: 90%;
+
+        .mat-icon{
+            font-size: 60px;
+            height: auto;
+            width: 45px;
+            cursor: pointer;
+        }
+        p{
+            margin: 0 0px;
+            font-size: 32px;
+        }
+    }
+
+    .search-container{
+        width: 90%;
+        padding: 20px 20px 0 20px;
+    }
+
+    .table-vehicle {
+        width: 90%;
+        padding: 0 20px 20px 20px;
+
+        .container-button-add{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+
+            button{
+                width: 150px;
+            }
+        }
+    }
+
+    .form-vehicle{
+        width: 90%;
+
+        .container-status{
+            display: flex;
+            flex-direction: column;
+
+            .toogle{
+
+            }
+        }
+
+        .container-button-form{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 50px;
+
+            button{
+                width: 150px;
+            }
+        }
+    }
+}

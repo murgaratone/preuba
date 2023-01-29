@@ -1,0 +1,48 @@
+<div class="container-costs">
+    <div class="menu-costs">
+        <div *ngIf="!viewMenu">
+            <button mat-mini-fab (click)="viewMenu = ! viewMenu" color="primary">
+                <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
+            </button>
+        </div>
+
+        <div class="menu" *ngIf="viewMenu">
+            <div class="close-menu" (click)="viewMenu = ! viewMenu">
+                <mat-icon fontSet="material-icons-outlined">close</mat-icon>
+            </div>
+            <div (click)="viewBasic = ! viewBasic" [ngClass]="{
+                'button-menu': true,
+                'button-menu-active': viewBasic
+              }">
+                <mat-icon fontSet="material-icons-outlined">directions_car</mat-icon>
+                <span>Básicos</span>
+            </div>
+            <div class="container-items" *ngIf="viewBasic">
+                <div class="list-items" *ngFor="let item of basicList" (click)="goRoute(item.url)">
+                    <mat-icon fontSet="material-icons-outlined">arrow_right</mat-icon>
+                    <span>{{item.name}}</span>
+                </div>
+            </div>
+            <div (click)="viewCombos = ! viewCombos" [ngClass]="{
+                'button-menu': true,
+                'button-menu-active': viewCombos
+              }">
+                <mat-icon fontSet="material-icons-outlined">car_rental</mat-icon>
+                <span>Combos</span>
+            </div>
+            <div class="container-items" *ngIf="viewCombos">
+                <div class="list-items" (click)="goRoute('create-combo')">
+                    <mat-icon fontSet="material-icons-outlined">arrow_right</mat-icon>
+                    <span>Crear Combo</span>
+                </div>
+                <div class="list-items" *ngFor="let item of combosList" (click)="goRoute(item.url, item.id)">
+                    <mat-icon fontSet="material-icons-outlined">arrow_right</mat-icon>
+                    <span>{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container-products">
+    <div class="table-historical-product">
+        <div class="container-header">
+            <div class="title-form">
+                <p>{{title}}</p>
+            </div>
+        </div>
+        <div class="row container-new-search">
+            <div *ngIf="formsHistoricalService.formHistoricalProduct">
+                <form #myFormProduct="ngForm" [formGroup]="formsHistoricalService.formHistoricalProduct"
+                    class="form-table col-12">
+                    <div class="row justify-content-right" style="margin: 0;">
+                        <div class="col-12 col-md-4 col-lg-3 container-message label-input">
+                            Selecciona las fechas de búsqueda
+                        </div>
+
+                        <div class="row datepickers col-11 col-md-7 col-lg-5">
+                            <div class="col-12 col-md-6 col-lg-6 container-date-picker"> 
+                                <mat-label class="label-input">Fecha inicio</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <input matInput appAutofocus formControlName="startDate" class="inputOutline" required
+                                        [matDatepicker]="picker_start">
+                                    <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker_start></mat-datepicker>
+                                    <mat-error
+                                        *ngIf="formsHistoricalService.formHistoricalProduct.get('startDate')?.hasError('required') && formsHistoricalService.formHistoricalProduct.get('startDate')?.touched">
+                                        Este campo es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6 col-lg-6 container-date-picker">
+                                <mat-label class="label-input">Fecha final</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <input matInput formControlName="endDate" class="inputOutline" required
+                                        [matDatepicker]="picker_end">
+                                    <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker_end></mat-datepicker>
+                                    <mat-error
+                                        *ngIf="formsHistoricalService.formHistoricalProduct.get('endDate')?.hasError('required') && formsHistoricalService.formHistoricalProduct.get('endDate')?.touched">
+                                        Este campo es requerido
+                                    </mat-error>
+                                </mat-form-field>                            
+                            </div>
+                        </div>                        
+
+                        <div class="col-1 col-md-1 col-lg-1 container-button-search">
+                            <button mat-raised-button color="primary" (click)="searchHistoricalProduct()" type="submit">
+                                <mat-icon color="secondary">search</mat-icon>
+                            </button>
+                        </div>
+
+                        <div class="col-lg-3 container-button-download" *ngIf="this.mode == 'table' || this.mode == 'download'">
+                            <button mat-raised-button color="primary" (click)="downloadReportHistoricalProduct()" type="submit">
+                                DESCARGAR PDF
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>            
+        </div>
+        <div class="box-table row" *ngIf="this.mode == 'table' || this.mode == 'download'">
+            <app-table [headers]="tableHistoricalService.headers" [data]="tableHistoricalService.data"
+                [totalPages]="tableHistoricalService.totalPages" [actualPage]="tableHistoricalService.actualPage"
+                [viewStatus]="tableHistoricalService.viewStatus"
+                (back)="tableHistoricalService.backPage()" (next)="tableHistoricalService.nextPage()">
+            </app-table>
+        </div>
+    </div>
+</div>

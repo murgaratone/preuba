@@ -1,0 +1,106 @@
+/**
+Pallet of colors that we will use
+.alert {
+  background-color: map-get($theme-colors, "danger");
+}
+*/
+// BOOTSTRAP Theme
+$theme-default: (
+  'primary': #090088, //$mat-blue-custom, 900
+  'primary-light': #456db3,
+  'secondary': #FF7300, // $mat-orange-custom, 900
+  'secondary-light': #FBE5D6,
+  'gray': #C7C7C7,
+  'gray-light': #767171,
+  'gray-dark': #262626,
+  'danger': rgb(194, 8, 8),
+  'white': #ffffff,
+  'blue-light': #DAE3F3,
+  'fern-green': #33691E
+);
+
+$dark-primary-text: rgba(black, 0.87);
+$dark-secondary-text: rgba(black, 0.54);
+$dark-disabled-text: rgba(black, 0.38);
+$dark-dividers: rgba(black, 0.12);
+$dark-focused: rgba(black, 0.12);
+$light-primary-text: white;
+$light-secondary-text: rgba(white, 0.7);
+$light-disabled-text: rgba(white, 0.5);
+$light-dividers: rgba(white, 0.12);
+$light-focused: rgba(white, 0.12);
+
+$default-font: Roboto, 'Helvetica Neue', sans-serif;
+$form-title-font: 'Raleway', sans-serif;
+$form-field-font: 'Raleway', sans-serif;
+$form-label-font: 'Raleway', sans-serif;
+$menu-font: 'Raleway', sans-serif;
+$header-title-font: 'Raleway', sans-serif;
+$footer-font: 'Raleway', sans-serif;
+$logo-font: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+
+$mat-blue-custom: (
+  50: #EBE4F4,
+  100: #CBBCE4,
+  200: #A991D3,
+  300: #8764C2,
+  400: #6D43B6,
+  500: #5221A9,
+  600: #491DA4,
+  700: #3B159C,
+  800: #2C0E94,
+  900: #090088,
+  A100: #ad9ace,
+  A200: #8b73b4,
+  A400: #663eaa,
+  A700: #00005A,
+  contrast: (50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  ),
+);
+
+
+$mat-orange-custom: (
+  50: #FFF8E1,
+  100: #FFEDB4,
+  200: #FEE284,
+  300: #FED751,
+  400: #FECD2B,
+  500: #FFC410,
+  600: #FFB607,
+  700: #FFA304,
+  800: #FF9202,
+  900: #FF7300,
+  A100: #ddca8b,
+  A200: #dabe64,
+  A400: #d4a713,
+  A700: #e79200,
+  contrast: (50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  ),
+);

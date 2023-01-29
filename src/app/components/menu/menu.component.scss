@@ -1,0 +1,101 @@
+@import "../../../themes/theme.scss";
+
+.container-menu-list {
+    width: 80px;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: map-get($theme-default, "gray-dark");
+    overflow-x: hidden;
+
+    .container-button {
+        width: 100%;
+        color: map-get($theme-default, "white");
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 19px;
+        margin-bottom: 12px;
+
+        .container-name{
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+    }
+
+    .container-items {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        width: 100%;
+
+        .items {
+            width: 100%;
+            padding: 5px 20px;
+            color: map-get($theme-default, "white");
+            margin-bottom: 10px;
+
+            .item {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                font-size: 19px;
+                align-items: center;
+                margin-bottom: 7px;
+
+                .icon {
+                    width: 45px;
+                    height: 45px;
+                    font-size: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .text {
+                    flex: 1;
+                    text-align: left;
+                    margin-left: 10px;
+                }
+
+                .hover-text{
+                    display: none;
+                }
+
+                &:hover {
+                    color: map-get($theme-default, "secondary");
+
+                    .hover-text{
+                        display: block;
+                        font-size: 10px;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .hover-item{
+                flex-direction: column;
+            }
+
+            .select {
+                .item {
+
+                    color: map-get($theme-default, "primary-light");
+                    &:hover {
+                        color: map-get($theme-default, "secondary");
+                    }
+                    .icon {
+
+                        border-bottom: 2px solid map-get($theme-default, "primary-light");
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mobile{
+    width: 260px;
+}

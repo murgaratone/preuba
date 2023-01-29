@@ -1,0 +1,77 @@
+<div class="container-initial" style="
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  ">
+  <div class="card-divitions row justify-content-around align-items-center w-75"
+    style="background-color: rgb(25, 34, 34); border-style: none; color: white;">
+    <img class="img-movil col-md-auto col-12 px-2" src="../../../assets/img/logo.png" alt="" />
+    <div class="form col-12 col-md-4">
+      <div class="title">
+        <form #myFormLogin="ngForm" [formGroup]="loginForm">
+          <div class="row justify-content-center " style="margin: 0">
+            <div class="col-12 container-form">
+              <h3 class="mb-0">Usuario</h3>
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Nombre de Usuario</mat-label>
+                <input matInput appAutofocus placeholder="Correo" formControlName="email" type="text" required />
+                <mat-error *ngIf="
+                  loginForm.get('email')?.hasError('required') &&
+                  loginForm.get('email')?.touched
+                ">
+                  Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="
+                  loginForm.get('email')?.hasError('email') &&
+                  loginForm.get('email')?.touched
+                ">
+                  Debe ser tipo email
+                </mat-error>
+                <mat-error *ngIf="
+                  loginForm.get('email')?.hasError('max') &&
+                  loginForm.get('email')?.touched
+                ">
+                  El tamaño máximo es 60
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 container-form">
+              <h2 style="font-size: 16px; margin-bottom: 0px">Contraseña</h2>
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput placeholder="Contraseña" formControlName="password" class="inputOutline" required
+                  [type]="hideRegister ? 'password' : 'text'" />
+                <button mat-icon-button matSuffix (click)="hideRegister = !hideRegister"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegister" type="button">
+                  <mat-icon>{{
+                    hideRegister ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                </button>
+                <mat-error *ngIf="
+                  loginForm.get('password')?.hasError('required') &&
+                  loginForm.get('password')?.touched
+                ">
+                  Este campo es requerido
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <mat-label role="button" class="txt principal-accent-color link-div paragraph mb-3 fs-6"
+              (click)="restorePassword()">
+              Olvidé mi contraseña
+            </mat-label>
+
+            <div class="button-continue-restaurant row justify-content-end">
+              <button mat-raised-button class="col-12" color="primary" (click)="login()">
+                Iniciar Sesión
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

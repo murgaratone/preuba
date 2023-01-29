@@ -1,0 +1,272 @@
+
+<div class="container-vehicle">
+    <div class="title-form">
+        <mat-icon (click)="back()" *ngIf="this.mode !== 'table'">chevron_left</mat-icon>
+        <p>{{title}}</p>
+    </div>
+
+    <div class="search-container" *ngIf="this.mode === 'table' && formsSearchService.formSearch">
+        <form #myFormSearch="ngForm" [formGroup]="formsSearchService.formSearch">
+            <div class="row justify-content-right" style="margin: 0;">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label [ngClass]="{'label-input': true}">Cliente
+                    </mat-label>
+                    <mat-form-field class="col-12 formOutline" appearance="outline">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput placeholder="Cliente" formControlName="name" class="inputOutline">
+                        <button mat-icon-button matSuffix (click)="formsSearchService.changeView('name')">
+                            <mat-icon>{{
+                                formsSearchService.hideName ? "cancel" : "search"
+                                }}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label [ngClass]="{'label-input': true}">Placa
+                    </mat-label>
+                    <mat-form-field class="col-12 formOutline" appearance="outline">
+                        <mat-label>Placa</mat-label>
+                        <input matInput placeholder="Placa" formControlName="plate" class="inputOutline">
+                        <button mat-icon-button matSuffix (click)="formsSearchService.changeView('plate')">
+                            <mat-icon>{{
+                                formsSearchService.hidePlate ? "cancel" : "search"
+                                }}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-vehicle" *ngIf="this.mode === 'table'">
+        <app-table [headers]="tableVehicleService.headers" [data]="tableVehicleService.data"
+            [actions]="tableVehicleService.actions" [totalPages]="tableVehicleService.totalPages"
+            [disableEditItemWithStatus]="true"
+            [actualPage]="tableVehicleService.actualPage"
+            (edit)="tableVehicleService.editVehicle($event)" (view)="tableVehicleService.viewVehicle($event)"
+            (back)="tableVehicleService.backPage()" (next)="tableVehicleService.nextPage()"></app-table>
+        <div class="container-button-add" *ngIf="configService.role != configService.partnerUser.key">
+            <button mat-raised-button class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6" color="primary"
+                (click)="addVehicleButton()">
+                <mat-icon>add</mat-icon>
+                Agregar
+            </button>
+        </div>
+    </div>
+
+    <div class="form-vehicle" *ngIf="this.mode !== 'table'">
+        <div *ngIf="formsVehicleService.formVehicle">
+            <form #myFormVehicle="ngForm" [formGroup]="formsVehicleService.formVehicle">
+                <div class="row justify-content-right" style="margin: 0;">
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Primer
+                            Nombre</mat-label>
+                        <mat-form-field class="col-12" appearance="outline">
+                            <mat-label>Primer Nombre</mat-label>
+                            <input matInput appAutofocus placeholder="Nombre" formControlName="name" type="text"
+                                required class="inputOutline">
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('name')?.hasError('required') && formsVehicleService.formVehicle.get('name')?.touched">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Primer
+                            Apellido</mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Primer Apellido</mat-label>
+                            <input matInput placeholder="Apellido" formControlName="lastName" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('lastName')?.hasError('required') && formsVehicleService.formVehicle.get('lastName')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Segundo
+                            Apellido</mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Segundo Apellido</mat-label>
+                            <input matInput placeholder="Segundo Apellido" formControlName="secondLastName" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('secondLastName')?.hasError('required') && formsVehicleService.formVehicle.get('secondLastName')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Celular
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Celular</mat-label>
+                            <input matInput placeholder="Celular" formControlName="phoneNumber" class="inputOutline" required
+                                type="number">
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('phoneNumber')?.hasError('required') && formsVehicleService.formVehicle.get('phoneNumber')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('phoneNumber')?.hasError('min') && formsVehicleService.formVehicle.get('phoneNumber')?.touched">
+                                Debe ser de 8 caracteres
+                            </mat-error>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('phoneNumber')?.hasError('max') && formsVehicleService.formVehicle.get('phoneNumber')?.touched">
+                                Debe ser de 8 caracteres
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Cédula
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Cédula</mat-label>
+                            <input matInput placeholder="Cédula" formControlName="dni" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('dni')?.hasError('required') && formsVehicleService.formVehicle.get('dni')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Dirección
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput placeholder="Dirección" formControlName="address" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('address')?.hasError('required') && formsVehicleService.formVehicle.get('address')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Correo
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Correo</mat-label>
+                            <input matInput placeholder="Correo" formControlName="email" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('email')?.hasError('required') && formsVehicleService.formVehicle.get('email')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('email')?.hasError('email') && formsVehicleService.formVehicle.get('email')?.touched">
+                                Debes escribir un correo electrónico válido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Placa
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Placa</mat-label>
+                            <input matInput placeholder="Placa" formControlName="plate" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('plate')?.hasError('required') && formsVehicleService.formVehicle.get('plate')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                            <mat-error
+                                *ngIf="(formsVehicleService.formVehicle.get('plate')?.hasError('minlength')
+                                || formsVehicleService.formVehicle.get('plate')?.hasError('pattern')
+                                || formsVehicleService.formVehicle.get('plate')?.hasError('maxlength'))
+                                 && formsVehicleService.formVehicle.get('plate')?.touched">
+                                El formato son: 2 letras y 4 números, o 6 números
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Fecha de
+                            Registro</mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Fecha de Registro</mat-label>
+                            <input matInput placeholder="Fecha" formControlName="registerDate" class="inputOutline" required
+                                [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('registerDate')?.hasError('required') && formsVehicleService.formVehicle.get('registerDate')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Marca
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Marca</mat-label>
+
+                            <mat-select #brand matNativeControl formControlName="brand" required
+                                class="inputOutline">
+                                <mat-option *ngFor="let brand of formsVehicleService.brands" [value]="brand.id">
+                                    {{brand.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('brand')?.hasError('required') && formsVehicleService.formVehicle.get('brand')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Tipo de Vehículo
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Tipo de Vehículo</mat-label>
+
+                            <mat-select #profile matNativeControl formControlName="vehicleType" required
+                                class="inputOutline">
+                                <mat-option *ngFor="let vehicleType of formsVehicleService.vehicleTypes" [value]="vehicleType.id">
+                                    {{vehicleType.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="formsVehicleService.formVehicle.get('vehicleType')?.hasError('required') && formsVehicleService.formVehicle.get('vehicleType')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="container-button-form">
+                        <button mat-raised-button class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6" color="primary"
+                            (click)="saveVehicle()"
+                            *ngIf="this.mode === 'create'"
+                            type="submit">
+                            <mat-icon>add</mat-icon>
+                            Agregar
+                        </button>
+
+                        <button mat-raised-button class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6" color="primary"
+                            (click)="saveVehicle()" *ngIf="this.mode === 'edit'" type="submit">
+                            <mat-icon>save</mat-icon>
+                            Guardar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

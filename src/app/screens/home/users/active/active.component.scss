@@ -1,0 +1,63 @@
+@import "../../../../../themes/theme.scss";
+
+.container-users-active {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+
+    .table-active {
+        width: 90%;
+        padding: 20px;
+        margin-top: 10px;
+
+        .container-button-add{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+
+            button{
+                width: 150px;
+            }
+        }
+    }
+
+    .form-active{
+        width: 90%;
+
+        .container-status{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title-form{
+            display: flex;
+            justify-content: left;
+            margin-bottom: 20px;
+            align-items: center;
+            color: map-get($theme-default, "primary");
+
+            .mat-icon{
+                font-size: 60px;
+                height: auto;
+                width: 45px;
+                cursor: pointer;
+            }
+            p{
+                margin: 0 0px;
+                font-size: 32px;
+            }
+        }
+
+        .container-button-form{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 50px;
+
+            button{
+                width: 150px;
+            }
+        }
+    }
+}

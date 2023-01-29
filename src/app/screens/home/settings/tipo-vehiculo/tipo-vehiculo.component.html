@@ -1,0 +1,97 @@
+<div class="container-vehicle-active">
+  <div class="row justify-content-evenly container-grid">
+    <div class="col-12 col-md-6">
+      <div class="table-active">
+        <div class="container-button-add">
+          <div class="title-form">
+            <p>Tipo de vehículo</p>
+          </div>
+          <button
+            (click)="scroll(target)"
+            mat-raised-button
+            color="primary"
+            (click)="newVehicleButton()"
+            [disabled]="mode === 'create' || mode === 'edit'"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="table-active-panel mt-4">
+          <app-table
+            [headers]="tableTipoVehiculoSettingsService.headers"
+            [data]="tableTipoVehiculoSettingsService.data"
+            [actions]="tableTipoVehiculoSettingsService.actions"
+            [totalPages]="tableTipoVehiculoSettingsService.totalPages"
+            [actualPage]="tableTipoVehiculoSettingsService.actualPage"
+            [disableEditItemWithStatus]="true"
+            (edit)="tableTipoVehiculoSettingsService.editVehicleType($event)"
+            (edit)="tableTipoVehiculoSettingsService.scroll(target)"
+            (back)="tableTipoVehiculoSettingsService.backPage()"
+            (next)="tableTipoVehiculoSettingsService.nextPage()"
+          >
+          </app-table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div
+        class="form-active"
+        *ngIf="this.mode === 'create' || this.mode === 'edit'"
+      >
+        <div class="center-form">
+          <form
+            [formGroup]="formsTipoVehiculoSettingsService.formVehicleType"
+            *ngIf="formsTipoVehiculoSettingsService.formVehicleType"
+          >
+            <div class="centerDiv">
+              <p>{{ title }}</p>
+            </div>
+            <div>
+              <mat-label class="label-input">Tipo Vehículo</mat-label>
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Tipo Vehículo</mat-label>
+                <input
+                  matInput
+                  appAutofocus
+                  placeholder="Tipo Vehículo"
+                  formControlName="name"
+                  type="text"
+                  required
+                  class="inputOutline"
+                />
+                <!-- <mat-error
+                      *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+                      Este campo es obligatorio
+                  </mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="container-button-form">
+              <button mat-raised-button color="primary" (click)="vehicleSave()">
+                <mat-icon fontSet="material-icons-outlined">save</mat-icon>
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="container-logo">
+        <img
+          *ngIf="this.mode !== 'create' && this.mode !== 'edit'"
+          class="w-75 pl-4 mx-auto"
+          src="../../../../../assets/img/logo.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div #target class="container-logo invisible">
+      <img
+        *ngIf="this.mode !== 'create' && this.mode !== 'edit'"
+        class="w-25 pl-4 mx-auto"
+        src="../../../../../assets/img/logo.png"
+        alt=""
+      />
+    </div>
+  </div>
+</div>

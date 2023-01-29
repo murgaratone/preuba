@@ -1,0 +1,10 @@
+<div class="container-users-inactive">
+    <div class="table-inactive">
+        <app-table [headers]="headers" [data]="data"
+            [actions]="actions" [totalPages]="totalPages"
+            [disableEditItemWithStatus]="true"
+            [actualPage]="actualPage" (delete)="changeStatusUser($event)"
+            (edit)="editUser($event)" (view)="viewUser($event)"
+            (back)="backPage()" (next)="nextPage()"></app-table>
+    </div>
+</div>

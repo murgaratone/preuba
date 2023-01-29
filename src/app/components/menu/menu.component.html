@@ -1,0 +1,21 @@
+<div class="container-menu-list" [ngClass]="{ 'mobile': configService.screenWidth <= 660}">
+    <div class="container-button" *ngIf="configService.screenWidth <= 660">
+        <button mat-icon-button (click)="configService.toggle()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <div class="container-name">
+            {{storageService.settings?.user?.name}}
+        </div>
+    </div>
+    <div class="container-items">
+        <div class="items" *ngFor="let item of configService.menu">
+            <div [ngClass]="{ 'select': item.select}">
+                <div class="item" (click)="configService.changeMenu(item)" [ngClass]="{ 'hover-item': configService.screenWidth > 660}">
+                    <mat-icon class="icon">{{item.icon}}</mat-icon>
+                    <div class="text" *ngIf="configService.screenWidth <= 660">{{item.text}}</div>
+                    <div class="hover-text" *ngIf="configService.screenWidth > 660">{{item.text.split(" ")[0]}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="container-products">
+    <div class="table-active-create">
+        <div class="col-12">
+            <div class="container-header">
+                <div class="title-form">
+                    <mat-icon (click)="back()" *ngIf="this.mode !== 'table'">chevron_left</mat-icon>
+                    <p>{{title}}</p>
+                </div>
+            </div>
+            <div class="row container-forms-poduct" *ngIf="this.mode === 'add' || this.mode === 'substract'">
+                <div *ngIf="formsStockService.formStock">
+                    <form #myFormProduct="ngForm" [formGroup]="formsStockService.formStock"
+                        class="form-table">
+                        <div class="row justify-content-right" style="margin: 0;">
+                            <div class="col-12 col-md-3">
+                                <mat-label class="label-input label-name">
+                                    Nombre Producto</mat-label>
+                                <mat-form-field class="col-12" appearance="outline">
+                                    <input matInput appAutofocus placeholder="" formControlName="name"
+                                    type="text" class="inputOutline">
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('name')?.hasError('required') 
+                                        && formsStockService.formStock.get('name')?.touched">
+                                        Este campo es obligatorio
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('name')?.hasError('maxlength') 
+                                        && formsStockService.formStock.get('name')?.touched">
+                                        Deben ser máximo 20 caracteres
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <mat-label class="label-input">Código</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <input matInput appAutofocus placeholder="" formControlName="code"
+                                    type="text" class="inputOutline">
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('code')?.hasError('required') 
+                                        && formsStockService.formStock.get('code')?.touched">
+                                        Este campo es requerido
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('code')?.hasError('maxlength') 
+                                        && formsStockService.formStock.get('code')?.touched">
+                                        Deben ser máximo 10 caracteres
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- <div class="col-12 col-md-3">
+                                <mat-label class="label-input">Presentación</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <mat-select #profile matNativeControl formControlName="units" required
+                                        class="inputOutline">
+                                        <mat-option *ngFor="let unit of formsStockService.units" [value]="unit.id">
+                                            {{unit.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('units')?.hasError('required') 
+                                        && formsStockService.formStock.get('units')?.touched">
+                                        Este campo es requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div> -->
+
+                            <div class="col-12 col-md-3">
+                                <mat-label class="label-input">Cantidad</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <input matInput appAutofocus placeholder="" formControlName="quantity"
+                                    type="number" class="inputOutline">
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('quantity')?.hasError('required') 
+                                        && formsStockService.formStock.get('quantity')?.touched">
+                                        Este campo es requerido
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('quantity')?.hasError('max') 
+                                        && formsStockService.formStock.get('quantity')?.touched">
+                                        El valor máximo debe ser 99999.99
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('quantity')?.hasError('min') 
+                                        && formsStockService.formStock.get('quantity')?.touched">
+                                        El valor mínimo debe ser 0
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('quantity')?.hasError('pattern') 
+                                        && formsStockService.formStock.get('quantity')?.touched">
+                                        Deben ser máximo 2 decimales
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-12 col-md-3" *ngIf="this.mode === 'add'">
+                                <mat-label class="label-input">Costo unitario</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <input matInput appAutofocus placeholder="" formControlName="unitPrice"
+                                    type="number" class="inputOutline">
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('unitPrice')?.hasError('required') 
+                                        && formsStockService.formStock.get('unitPrice')?.touched">
+                                        Este campo es requerido
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('unitPrice')?.hasError('max') 
+                                        && formsStockService.formStock.get('unitPrice')?.touched">
+                                        El valor máximo debe ser 99999.99
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('unitPrice')?.hasError('min') 
+                                        && formsStockService.formStock.get('unitPrice')?.touched">
+                                        El valor mínimo debe ser 0
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('unitPrice')?.hasError('pattern') 
+                                        && formsStockService.formStock.get('unitPrice')?.touched">
+                                        Deben ser máximo 2 decimales
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row justify-content-right" style="margin: 0;">
+                            <div class="col-12 col-md-11">
+                                <mat-label class="label-input">Observaciones</mat-label>
+                                <mat-form-field class="col-12 formOutline" appearance="outline">
+                                    <input matInput appAutofocus placeholder="" formControlName="relatedNotes"
+                                    type="text" class="inputOutline">
+                                    <mat-error
+                                        *ngIf="formsStockService.formStock.get('relatedNotes')?.hasError('max') 
+                                        && formsStockService.formStock.get('relatedNotes')?.touched">
+                                        Deben ser máximo 100 caracteres
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-12 col-md-1 container-button-save">
+                                <button mat-raised-button color="primary" (click)="saveProduct()" type="submit">
+                                    <mat-icon color="secondary">save</mat-icon>
+                                    <span class="text-button"> Guardar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="box-table row" *ngIf="this.mode === 'table'">
+                <app-table [headers]="tableStockService.headers" [data]="tableStockService.data"
+                    [actions]="tableStockService.actions" [totalPages]="tableStockService.totalPages"
+                    [viewStatus]="tableStockService.viewStatus" [actualPage]="tableStockService.actualPage"
+                    [disableEditItemWithStatus]="tableStockService.disableEditItemWithStatus"
+                    (add)="tableStockService.addProductToStock($event)"
+                    (substract)="tableStockService.subProductToStock($event)"
+                    (back)="tableStockService.backPage()" (next)="tableStockService.nextPage()">
+                </app-table>
+            </div>
+        </div>
+    </div>
+</div>

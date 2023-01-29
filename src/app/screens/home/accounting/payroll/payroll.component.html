@@ -1,0 +1,307 @@
+<div class="container-payroll">
+  <div class="table-payroll-create">
+    <div class="col-12">
+      <div class="container-header">
+        <div class="title-form">
+          <mat-icon
+            (click)="back()"
+            *ngIf="
+              this.mode !== 'table' &&
+              this.mode !== 'view' &&
+              this.mode !== 'edit' &&
+              this.mode !== 'add'
+            "
+            >chevron_left</mat-icon
+          >
+          <p *ngIf="this.mode === 'table'">{{ title }}</p>
+        </div>
+      </div>
+      <div class="container-payroll-create">
+        <div class="table-payroll" *ngIf="this.mode === 'table'">
+          <app-table
+            [headers]="tablePayrollAccountingService.headers"
+            [data]="tablePayrollAccountingService.data"
+            [actions]="tablePayrollAccountingService.actions"
+            [totalPages]="tablePayrollAccountingService.totalPages"
+            [actualPage]="tablePayrollAccountingService.actualPage"
+            (add)="tablePayrollAccountingService.addPayroll($event)"
+            (view)="tablePayrollAccountingService.viewPayroll($event)"
+            (back)="tablePayrollAccountingService.backPage()"
+            (next)="tablePayrollAccountingService.nextPage()"
+          ></app-table>
+        </div>
+
+        <div class="form-payroll" *ngIf="this.mode !== 'table'">
+          <div *ngIf="formsPayrollAccountingService.formPayrollAccounting">
+            <div class="title-form">
+              <p>{{ title }}</p>
+            </div>
+            <form
+              #myFormUser="ngForm"
+              [formGroup]="formsPayrollAccountingService.formPayrollAccounting"
+            >
+              <div class="row justify-content-right" style="margin: 0">
+                <div class="row justify-content-right">
+                  <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label
+                      [ngClass]="{
+                        'label-input-disabled': true
+                      }"
+                      >Nombre</mat-label
+                    >
+                    <mat-form-field class="col-12" appearance="outline">
+                      <mat-label>Nombre</mat-label>
+                      <input
+                        matInput
+                        appAutofocus
+                        placeholder="Nombre"
+                        formControlName="name"
+                        type="text"
+                        required
+                        class="inputOutline"
+                      />
+                      <mat-error
+                        *ngIf="
+                          formsPayrollAccountingService.formPayrollAccounting
+                            .get('name')
+                            ?.hasError('required') &&
+                          formsPayrollAccountingService.formPayrollAccounting.get(
+                            'name'
+                          )?.touched
+                        "
+                      >
+                        Este campo es obligatorio
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label
+                      [ngClass]="{
+                        'label-input-disabled': true
+                      }"
+                      >Cargo</mat-label
+                    >
+                    <mat-form-field
+                      class="col-12 formOutline"
+                      appearance="outline"
+                    >
+                      <mat-label>Cargo</mat-label>
+                      <input
+                        matInput
+                        placeholder="Cargo"
+                        formControlName="title"
+                        class="inputOutline"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          formsPayrollAccountingService.formPayrollAccounting
+                            .get('title')
+                            ?.hasError('required') &&
+                          formsPayrollAccountingService.formPayrollAccounting.get(
+                            'title'
+                          )?.touched
+                        "
+                      >
+                        Este campo es requerido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="pb-3">
+                  <mat-label class="label-input"
+                    >Por favor selecciona</mat-label
+                  >
+                </div>
+
+                <div class="row justify-content-right">
+                  <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label
+                      [ngClass]="{
+                        'label-input': !disabled,
+                        'label-input-disabled': disabled
+                      }"
+                      >Año
+                    </mat-label>
+                    <mat-form-field class="col-12 formOutline"
+                    appearance="outline">
+                      <mat-label>Año</mat-label>
+                      <mat-select formControlName="yearPay">
+                        <mat-option *ngFor="let year of years" [value]="year">{{
+                          year
+                        }}</mat-option>
+                      </mat-select>
+                      <mat-error
+                        *ngIf="
+                          formsPayrollAccountingService.formPayrollAccounting
+                            .get('yearPay')
+                            ?.hasError('required') &&
+                          formsPayrollAccountingService.formPayrollAccounting.get(
+                            'yearPay'
+                          )?.touched
+                        "
+                      >
+                        Este campo es requerido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label
+                      [ngClass]="{
+                        'label-input': !disabled,
+                        'label-input-disabled': disabled
+                      }"
+                      >Mes
+                    </mat-label>
+                    <mat-form-field class="col-12 formOutline"
+                    appearance="outline">
+                      <mat-label>Mes</mat-label>
+                      <mat-select formControlName="monthPay">
+                        <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
+                      </mat-select>
+                      <mat-error
+                        *ngIf="
+                          formsPayrollAccountingService.formPayrollAccounting
+                            .get('monthPay')
+                            ?.hasError('required') &&
+                          formsPayrollAccountingService.formPayrollAccounting.get(
+                            'monthPay'
+                          )?.touched
+                        "
+                      >
+                        Este campo es requerido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label
+                      [ngClass]="{
+                        'label-input': !disabled,
+                        'label-input-disabled': disabled
+                      }"
+                      >Periodo
+                    </mat-label>
+                    <mat-form-field
+                      class="col-12 formOutline"
+                      appearance="outline"
+                    >
+                      <mat-label>Periodo</mat-label>
+                      <mat-select
+                        matNativeControl
+                        placeholder="Periodo"
+                        formControlName="period"
+                        class="inputOutline"
+                        required
+                      >
+                        <mat-option value="FIRST">
+                          Primera Quincena
+                        </mat-option>
+                        <mat-option value="SECOND">
+                          Segunda Quincena
+                        </mat-option>
+                      </mat-select>
+                      <mat-error
+                        *ngIf="
+                          formsPayrollAccountingService.formPayrollAccounting
+                            .get('period')
+                            ?.hasError('required') &&
+                          formsPayrollAccountingService.formPayrollAccounting.get(
+                            'period'
+                          )?.touched
+                        "
+                      >
+                        Este campo es requerido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div
+                  class="row justify-content-right"
+                  *ngIf="this.mode !== 'view'"
+                >
+                  <div
+                    class="col-12 col-sm-6 col-lg-4"
+                    *ngIf="
+                      formsPayrollAccountingService.profileSelect !=
+                      configService.cleanerUser.key
+                    "
+                  >
+                    <mat-label
+                      [ngClass]="{
+                        'label-input': !disabled,
+                        'label-input-disabled': disabled
+                      }"
+                      >Valor a pagar
+                    </mat-label>
+                    <mat-form-field
+                      class="col-12 formOutline"
+                      appearance="outline"
+                    >
+                      <mat-label>Valor a pagar</mat-label>
+                      <input
+                        matInput
+                        placeholder="Valor a pagar"
+                        formControlName="amount"
+                        class="inputOutline"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          formsPayrollAccountingService.formPayrollAccounting
+                            .get('amount')
+                            ?.hasError('amount') &&
+                          formsPayrollAccountingService.formPayrollAccounting.get(
+                            'amount'
+                          )?.touched
+                        "
+                      >
+                        Debes escribir un valor válido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-4 mt-4">
+                    <mat-label class="label-input"
+                      >Este es el valor a pagar, si no es por favor
+                      ajústalo</mat-label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="container-forms-payroll">
+                <button
+                  mat-raised-button
+                  class="col-3 col-sm-3 col-lg-2 col-sm-3 col-md-3"
+                  color="primary"
+                  (click)="generatePyarollView()"
+                  *ngIf="this.mode === 'view' "
+                  type="submit"
+                >
+                  <mat-icon>visibility</mat-icon>
+                  Ver
+                </button>
+
+                <button
+                  mat-raised-button
+                  class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6"
+                  color="primary"
+                  (click)="generatePyarollSave()"
+                  *ngIf="this.mode === 'edit' || this.mode === 'add'"
+                  type="submit"
+                >
+                  <mat-icon>save</mat-icon>
+                  Generar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

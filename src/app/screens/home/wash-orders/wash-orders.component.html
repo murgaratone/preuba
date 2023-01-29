@@ -1,0 +1,294 @@
+<div class="container-wash-orders">
+    <div class="row" [ngClass]="{'header-form': this.mode !== 'table', 'header-form-table': this.mode === 'table'}" >
+        <div class="title-form col-12 col-md-9 col-lg-9">
+            <mat-icon (click)="back()" *ngIf="this.mode !== 'table'">chevron_left</mat-icon>
+            <p>{{title}}</p>
+        </div>
+        <div [ngClass]="{'date-plate': this.mode !== 'create', 'date-plate-create': this.mode === 'create'}" 
+            class="col-12 col-md-3 col-lg-3" *ngIf="this.mode !== 'table'">            
+            <mat-label class="date" *ngIf="this.mode === 'create'">
+                <b class="label-input-disabled">Fecha&emsp;</b>
+                <data>{{washOrdersDate}}</data>
+            </mat-label>
+            <mat-label class="date" *ngIf="this.mode !== 'create'">
+                <b class="label-input-disabled">Fecha&emsp;</b>
+                <data>{{formsWashOrdersService.formWashOrders?.value.washOrderDate}}</data>
+            </mat-label>
+            <mat-label class="plate" *ngIf="this.mode !== 'create'">
+                <b class="label-input-disabled">Placa&nbsp;&emsp;</b>
+                <data>{{formsWashOrdersService.washOrders?.plate}}</data>
+            </mat-label>
+        </div>
+    </div>    
+
+    <div class="search-container" *ngIf="this.mode === 'table' && formsSearchService.formSearch">
+        <form #myFormSearch="ngForm" [formGroup]="formsSearchService.formSearch">
+            <div class="row justify-content-right" style="margin: 0;">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label [ngClass]="{'label-input': true}">Cliente
+                    </mat-label>
+                    <mat-form-field class="col-12 formOutline" appearance="outline">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput placeholder="Cliente" formControlName="name" class="inputOutline">
+                        <button mat-icon-button matSuffix (click)="formsSearchService.changeView('name')">
+                            <mat-icon>{{
+                                formsSearchService.hideName ? "cancel" : "search"
+                                }}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <mat-label [ngClass]="{'label-input': true}">Placa
+                    </mat-label>
+                    <mat-form-field class="col-12 formOutline" appearance="outline">
+                        <mat-label>Placa</mat-label>
+                        <input matInput placeholder="Placa" formControlName="plate" class="inputOutline">
+                        <button mat-icon-button matSuffix (click)="formsSearchService.changeView('plate')">
+                            <mat-icon>{{
+                                formsSearchService.hidePlate ? "cancel" : "search"
+                                }}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-wash-orders" *ngIf="this.mode === 'table'">
+        <app-table [headers]="tableWashOrdersService.headers" [data]="tableWashOrdersService.data"
+            [actions]="tableWashOrdersService.actions" [totalPages]="tableWashOrdersService.totalPages"
+            [viewStatus]="tableWashOrdersService.viewStatus" [actualPage]="tableWashOrdersService.actualPage"
+            [disableEditItemWithStatus]="tableWashOrdersService.disableEditItemWithStatus"
+            (edit)="tableWashOrdersService.editWashOrder($event)" (view)="tableWashOrdersService.viewWashOrder($event)"
+            (back)="tableWashOrdersService.backPage()" (next)="tableWashOrdersService.nextPage()"></app-table>
+        <div class="container-button-add" *ngIf="configService.role != configService.partnerUser.key">
+            <button mat-raised-button class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6" color="primary"
+                (click)="addWashOrderButton()">
+                <mat-icon>add</mat-icon>
+                Agregar
+            </button>
+        </div>
+    </div>
+
+    <div class="form-wash-orders" *ngIf="this.mode !== 'table'">
+        <div *ngIf="formsWashOrdersService.formWashOrders">
+            <form #myFormWashOrder="ngForm" [formGroup]="formsWashOrdersService.formWashOrders">
+                <div class="row justify-content-right" >
+                    <div class="container-plate col-10 col-sm-6 col-lg-4" *ngIf="this.mode === 'create'">
+                        <mat-label [ngClass]="{'label-input': disabled, 'label-input-disabled': !disabled}">Placa</mat-label>
+                        <mat-form-field class="col-12" appearance="outline">
+                            <mat-label>Placa</mat-label>
+                            <input matInput appAutofocus placeholder="Placa" formControlName="plate" type="text"
+                                required class="inputOutline">
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('plate')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('plate')?.touched">
+                                Este campo es obligatorio
+                            </mat-error>
+                            <mat-error
+                                *ngIf="(formsWashOrdersService.formWashOrders.get('plate')?.hasError('minlength')
+                                || formsWashOrdersService.formWashOrders.get('plate')?.hasError('pattern')
+                                || formsWashOrdersService.formWashOrders.get('plate')?.hasError('maxlength'))
+                                && formsWashOrdersService.formWashOrders.get('plate')?.touched">
+                                El formato son: 2 letras y 4 números, o 6 números
+                            </mat-error>
+                        </mat-form-field>                            
+                    </div>
+                    <div class="container-icon col-2 col-sm-6 col-lg-8" *ngIf="this.mode === 'create'">
+                        <button mat-mini-fab color="primary" [ngStyle]="{transform: 'scale(0.8)'}"
+                            (click)="searchCustomerByPlate()" type="submit">
+                            <mat-icon fontSet="material-icons-outlined">search</mat-icon>
+                        </button>
+                    </div>
+                    
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Primer
+                            Nombre</mat-label>
+                        <mat-form-field class="col-12" appearance="outline">
+                            <mat-label>Primer Nombre</mat-label>
+                            <input matInput appAutofocus placeholder="Primer Nombre" formControlName="name" type="text"
+                                required class="inputOutline">
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('name')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('name')?.touched">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Primer
+                            Apellido</mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Primer Apellido</mat-label>
+                            <input matInput placeholder="Primer Apellido" formControlName="lastName" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('lastName')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('lastName')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Segundo
+                            Apellido</mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Segundo Apellido</mat-label>
+                            <input matInput placeholder="Segundo Apellido" formControlName="secondLastName" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('secondLastName')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('secondLastName')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Tipo de Vehículo
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Tipo de Vehículo</mat-label>
+                            <input matInput placeholder="Tipo de Vehículo" formControlName="vehicleType" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('vehicleType')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('vehicleType')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Marca
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Marca</mat-label>
+                            <input matInput placeholder="Marca" formControlName="brand" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('brand')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('brand')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label *ngIf="this.mode !== 'view'" [ngClass]="{'label-input': disabled, 'label-input-disabled': !disabled}">
+                            Tipo de Servicio
+                        </mat-label>
+                        <mat-label *ngIf="this.mode == 'view'" [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">
+                            Tipo de Servicio
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Tipo de Servicio</mat-label>
+                            <mat-select #profile matNativeControl formControlName="serviceType" required
+                                class="inputOutline">
+                                <mat-option *ngFor="let serviceType of formsWashOrdersService.serviceTypes" [value]="serviceType.id">
+                                    {{serviceType.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('serviceType')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('serviceType')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">Precio del Servicio
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Precio del Servicio</mat-label>
+                            <input matInput placeholder="Precio del Servicio" formControlName="servicePrice" class="inputOutline" required
+                                type="number">
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('servicePrice')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('servicePrice')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label *ngIf="this.mode !== 'view'" [ngClass]="{'label-input': disabled, 'label-input-disabled': !disabled}">
+                            Cleaner
+                        </mat-label>
+                        <mat-label *ngIf="this.mode == 'view'" [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">
+                            Cleaner
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Cleaner</mat-label>
+                            <mat-select #profile matNativeControl formControlName="cleaner" required
+                                class="inputOutline">
+                                <mat-option *ngFor="let cleaners of formsWashOrdersService.cleaners" [value]="cleaners.id">
+                                    {{cleaners.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('cleaner')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('cleaner')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <mat-label *ngIf="this.mode !== 'view'" [ngClass]="{'label-input': disabled, 'label-input-disabled': !disabled}">
+                            Pista
+                        </mat-label>
+                        <mat-label *ngIf="this.mode == 'view'" [ngClass]="{'label-input': !disabled, 'label-input-disabled': disabled}">
+                            Pista
+                        </mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Pista</mat-label>
+                            <mat-select #profile matNativeControl formControlName="washingTrack" required
+                                class="inputOutline">
+                                <mat-option *ngFor="let track of formsWashOrdersService.tracks" [value]="track.id">
+                                    {{track.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="formsWashOrdersService.formWashOrders.get('washingTrack')?.hasError('required') 
+                                && formsWashOrdersService.formWashOrders.get('washingTrack')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="container-button-form">
+                        <button mat-raised-button class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6" color="primary"
+                            (click)="saveWashOrder()"
+                            *ngIf="this.mode === 'create'"
+                            type="submit">
+                            <mat-icon>add</mat-icon>
+                            Crear
+                        </button>
+
+                        <button mat-raised-button class="check col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6"
+                            (click)="orderFinished()" 
+                            *ngIf="this.mode === 'edit'" 
+                            type="submit">
+                            <mat-icon>check</mat-icon>
+                            Finalizar
+                        </button>
+
+                        <button mat-raised-button class="col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6" color="primary"
+                            (click)="saveWashOrder()" 
+                            *ngIf="this.mode === 'edit'" 
+                            type="submit">
+                            <mat-icon>save</mat-icon>
+                            Guardar
+                        </button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

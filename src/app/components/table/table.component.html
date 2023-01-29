@@ -1,0 +1,144 @@
+<div class="table-box">
+  <div class="table-container">
+    <div style="overflow-x: auto; padding-bottom: 10px">
+      <table *ngIf="data.length > 0">
+        <tr [style.height]="height ? height : '40px'">
+          <th
+            *ngFor="let header of headers; let i = index"
+            [style.width]="'calc(100%/' + headers.length + ')'"
+            [style.height]="height ? height : '40px'"
+          >
+            <div
+              [style.background-color]="color ? color : '#FF7300'"
+              [style.color]="colorText ? colorText : 'white'"
+              [style.text-align]="positionHeader"
+              [style.border]="border ? border : '1px solid #FF7300'"
+              [style.border-color]="
+                color ? color + ' !important' : '#FF7300 !important'
+              "
+              [ngClass]="{
+                'border-start-start': i == 0,
+                'border-start-end': i == headers.length - 1,
+                'div-th': true,
+                'border-top': true,
+                'border-right': i == headers.length - 1,
+                'border-left': i == 0
+              }"
+            >
+              {{ header }}
+            </div>
+          </th>
+        </tr>
+
+        <tr
+          *ngFor="let item of data; let i = index"
+          [style.height]="height ? height : '40px'"
+        >
+          <td
+            *ngFor="let key of keys; let y = index"
+            [style.width]="'calc(100%/' + headers.length + ')'"
+            [style.height]="height ? height : '40px'"
+          >
+            <div
+              [style.border]="border ? border : '1px solid #FF7300'"
+              [style.text-align]="positionCells"
+              class="div-td"
+              [ngClass]="{
+                'border-end-start': y == 0 && i == data.length - 1,
+                'border-end-end':
+                  y == headers.length - 1 && i == data.length - 1,
+                'border-right': y == headers.length - 1,
+                'border-left': y == 0,
+                'border-bottom': i == data.length - 1,
+                'background-secondary': item.select,
+                'background-primary': item.notSelect,
+                'color-alarm': item.alarm
+              }"
+              [style.border-color]="
+                color ? color + ' !important' : '#FF7300 !important'
+              "
+            >
+              {{ item[key] }}
+            </div>
+          </td>
+          <td *ngIf="viewActions" class="container-actions">
+            <div class="container-icon" *ngIf="actions.add">
+              <button
+                mat-mini-fab
+                class="icon-add"
+                [ngStyle]="{ transform: 'scale(0.8)' }"
+                (click)="handleAdd(item)"
+                [disabled]="!item.status && disableEditItemWithStatus"
+              >
+                <mat-icon fontSet="material-icons-outlined">add</mat-icon>
+              </button>
+            </div>
+            <div class="container-icon" *ngIf="actions.substract">
+              <button
+                mat-mini-fab
+                class="icon-subs"
+                [ngStyle]="{ transform: 'scale(0.8)' }"
+                (click)="handleSubstract(item)"
+                [disabled]="!item.status && disableEditItemWithStatus"
+              >
+                <mat-icon fontSet="material-icons-outlined">remove</mat-icon>
+              </button>
+            </div>
+            <div class="container-icon" *ngIf="actions.view">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="icon"
+                [ngStyle]="{ transform: 'scale(0.8)' }"
+                (click)="handleView(item)"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </div>
+            <div class="container-icon" *ngIf="actions.edit">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="icon"
+                [ngStyle]="{ transform: 'scale(0.8)' }"
+                (click)="handleEdit(item)"
+                [disabled]="!item.status && disableEditItemWithStatus"
+                [hidden]="
+                  item.status == 'Finalizada' && disableEditItemWithStatus
+                "
+              >
+                <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+              </button>
+            </div>
+            <div class="container-icon" *ngIf="actions.delete">
+              <mat-slide-toggle
+                color="primary"
+                [(ngModel)]="item.status"
+                (change)="onChange(item)"
+              >
+              </mat-slide-toggle>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="data.length === 0" class="no-data">
+      <p>No se encontraron datos relacionados</p>
+    </div>
+    <div
+      class="paginator"
+      [style.color]="color ? color : '#FF7300'"
+      *ngIf="paginator"
+    >
+      <mat-icon (click)="handleBack()" [ngClass]="{ disabled: actualPage == 1 }"
+        >arrow_circle_left</mat-icon
+      >
+      <h3>{{ "Página " + actualPage + " de " + totalPages }}</h3>
+      <mat-icon
+        (click)="handleNext()"
+        [ngClass]="{ disabled: actualPage >= totalPages }"
+        >arrow_circle_right
+      </mat-icon>
+    </div>
+  </div>
+</div>

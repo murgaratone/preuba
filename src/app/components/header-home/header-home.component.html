@@ -1,0 +1,25 @@
+<div class="header-home">
+  <button mat-icon-button (click)="configService.toggle()" *ngIf="configService.screenWidth <= 660">
+    <mat-icon class="menu-icon">menu</mat-icon>
+  </button>
+  <div class="container-header">
+    <div class="title">
+      <img src="../../../assets/img/logoTexto.png" alt="">
+    </div>
+    <div class="alerts">
+      <span *ngIf="configService.screenWidth > 660">{{storageService.settings?.user?.name + ' ' +
+        storageService.settings?.user?.lastName}}</span>
+      <div class="notifications" (click)="goAlarms()">
+        <button mat-icon-button>
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <div class="notification"*ngIf="notifications > 0">
+          {{notifications}}
+        </div>
+      </div>
+      <button mat-icon-button (click)="logOut()">
+        <mat-icon class="menu-icon">logout</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

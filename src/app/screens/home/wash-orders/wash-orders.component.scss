@@ -1,0 +1,210 @@
+@import "../../../../themes/theme.scss";
+
+.container-wash-orders {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+
+    .header-form {
+        width: 90%;
+        margin-bottom: 40px;
+
+        .title-form{
+            display: flex;
+            justify-content: left;
+            margin-bottom: 20px;
+            align-items: center;
+            color: map-get($theme-default, "primary");
+    
+            .mat-icon{
+                font-size: 60px;
+                height: auto;
+                width: 45px;
+                cursor: pointer;
+            }
+            p{
+                margin: 0 0px;
+                font-size: 32px;
+            }
+        }
+
+        .date-plate {
+            display: grid;
+            justify-content: flex-end;
+            margin-top: 5px;
+            align-items: center;
+
+            .date {
+                data{
+                    font-size: 110%;
+                    color: gray;
+                }
+            }
+
+            .plate {
+                data{
+                    font-size: 110%;
+                    color: gray;
+                }                
+            }
+
+            @media (max-width: 767px) {
+                justify-content: flex-start;
+                height: 70px;
+                margin-top: 0px;
+            }
+        }
+
+        .date-plate-create {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+
+            .date {
+                data{
+                    font-size: 110%;
+                    color: gray;
+                }
+            }
+
+            @media (max-width: 767px) {
+                justify-content: flex-start;
+                margin-top: 0px;
+                margin-left: inherit;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            margin-bottom: 30px;
+        }
+    }
+
+    .header-form-table {
+        width: 90%;
+
+        .title-form{
+            display: flex;
+            justify-content: left;
+            margin-bottom: 20px;
+            align-items: center;
+            color: map-get($theme-default, "primary");
+    
+            .mat-icon{
+                font-size: 60px;
+                height: auto;
+                width: 45px;
+                cursor: pointer;
+            }
+            p{
+                margin: 0 0px;
+                font-size: 32px;
+            }
+        }
+
+        .date-plate {
+            display: grid;
+            justify-content: flex-end;
+            margin-top: 5px;
+            align-items: center;
+
+            .date {
+                data{
+                    font-size: 110%;
+                    color: gray;
+                }
+            }
+
+            .plate {
+                data{
+                    font-size: 110%;
+                    color: gray;
+                }                
+            }
+
+            @media (max-width: 767px) {
+                justify-content: flex-start;
+                height: 70px;
+                margin-top: 0px;
+            }
+        }
+
+        .date-plate-create {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+
+            .date {
+                data{
+                    font-size: 110%;
+                    color: gray;
+                }
+            }
+
+            @media (max-width: 767px) {
+                justify-content: flex-start;
+                margin-top: 0px;
+                margin-left: inherit;
+            }
+        }
+    }
+
+    .search-container{
+        width: 90%;
+        padding: 20px 20px 0 20px;
+    }
+
+    .table-wash-orders {
+        width: 90%;
+        padding: 0 20px 20px 20px;
+
+        .container-button-add{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+
+            button{
+                width: 150px;
+            }
+        }
+    }
+
+    .form-wash-orders{
+        width: 90%;
+
+        .container-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .container-status{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container-button-form{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 50px;
+            margin-top: 10px;
+
+            .check{
+                color: white;
+                background-color: map-get($theme-default, "secondary");
+                margin-right: 16px;
+            }
+
+            button{
+                width: 150px;
+
+                @media (max-width: 359px) {
+                    max-width: 40px;
+                    white-space: normal;
+                }
+            }
+        }
+    }
+}

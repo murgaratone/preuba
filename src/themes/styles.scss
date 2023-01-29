@@ -1,0 +1,196 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/scss/bootstrap";
+@import "./theme.scss";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.background-input {
+    background-color: map-get($theme-default, "grey");
+}
+
+.primary-color {
+    color: map-get($theme-default, "primary");
+}
+
+.secondary-color {
+    color: map-get($theme-default, "primary");
+}
+
+.white-color {
+    color: map-get($theme-default, "white");
+}
+
+button {
+    height: 40px;
+    font-size: 16px !important;
+}
+
+.label-input {
+    color: map-get($theme-default, "white");
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.mat-form-field {
+    .mat-icon {
+        color: map-get($theme-default, "gray-light");
+    }
+}
+
+.mat-form-field-empty.mat-form-field-label,
+.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    color: map-get($theme-default, "gray-light");
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: map-get($theme-default, "gray");
+    border-radius: 5px;
+}
+
+.mat-form-field-appearance-outline .mat-input-element {
+    color: black;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+.mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
+    display: none !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-outline-gap {
+    border-top-color: unset !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+    background-color: rgb(212, 212, 212);
+    border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgb(168, 168, 168);
+    -webkit-border-radius: 1ex;
+
+    &:hover {
+        background-color: map-get($theme-default, "primary");
+    }
+}
+
+.snackbar-warn {
+    background-color: map-get($theme-default, "secondary") !important;
+    color: black !important;
+
+    button {
+        color: black !important;
+    }
+}
+
+.snackbar-success {
+    background-color: map-get($theme-default, "primary") !important;
+    color: white !important;
+
+    button {
+        color: white !important;
+    }
+}
+
+.snackbar-alert {
+    background-color: rgb(230, 21, 21) !important;
+    color: white !important;
+
+    button {
+        color: white !important;
+    }
+}
+
+.mat-slide-toggle-bar {
+    width: 46px !important;
+    height: 30px !important;
+    border-radius: 15px !important;
+    margin-top: 10px !important;
+}
+
+.mat-slide-toggle-thumb {
+    height: 30px !important;
+    width: 30px !important;
+    margin-top: 3px !important;
+}
+
+.container-home {
+    .label-input {
+        color: map-get($theme-default, "primary");
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .label-input-disabled {
+        color: map-get($theme-default, "gray-dark");
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .form-table {
+        .label-input {
+            color: map-get($theme-default, "primary");
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .label-input-disabled  {
+            font-size: 16px;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-outline {
+            background-color: white;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+            opacity: 1;
+            color: map-get($theme-default, "secondary");
+        }
+
+        mat-form-field.mat-form-field.mat-form-field-appearance-outline>div.mat-form-field-wrapper>div.mat-form-field-flex>div.mat-form-field-infix {
+            padding: 0.4em 0px
+        }
+
+        mat-form-field.mat-form-field.mat-form-field-appearance-outline>div.mat-form-field-wrapper>div.mat-form-field-flex>div.mat-form-field-infix>span.mat-form-field-label-wrapper {
+            top: -1.5em;
+        }
+
+        .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+            transform: translateY(-1.1em) scale(.75);
+            width: 133.33333%;
+        }
+    }
+
+    .title-form{
+        display: flex;
+        justify-content: left;
+        margin-bottom: 20px;
+        align-items: center;
+        color: map-get($theme-default, "primary");
+
+        .mat-icon{
+            font-size: 60px;
+            height: auto;
+            width: 45px;
+            cursor: pointer;
+        }
+        p{
+            margin: 0 0px;
+            font-size: 32px;
+        }
+    }
+}

@@ -1,0 +1,92 @@
+<div class="container-brand-active">
+  <div class="row justify-content-evenly container-grid">
+    <div class="col-12 col-md-6">
+      <div class="table-active">
+        <div class="table-active-panel container-button-add">
+          <div class="title-form">
+            <p>Marca</p>
+          </div>
+          <button
+            (click)="scroll(target)"
+            mat-raised-button
+            color="primary"
+            (click)="newBrandButton()"
+            [disabled]="mode === 'create' || mode === 'edit'"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div
+          class="table-active-panel mt-4"
+        >
+          <app-table
+            [headers]="tableMarcaService.headers"
+            [data]="tableMarcaService.data"
+            [totalPages]="tableMarcaService.totalPages"
+            [actions]="tableMarcaService.actions"
+            (edit)="tableMarcaService.editBrandVehicle($event)"
+            (edit)="tableMarcaService.scroll(target)"
+            [disableEditItemWithStatus]="true"
+            [actualPage]="tableMarcaService.actualPage"
+            (back)="tableMarcaService.backPage()"
+            (next)="tableMarcaService.nextPage()"
+          >
+          </app-table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div
+        class="form-active"
+        *ngIf="this.mode === 'create' || this.mode === 'edit'"
+      >
+        <div class="center-form">
+          <form
+            [formGroup]="formMarcaService.formBrandVehicle"
+            *ngIf="formMarcaService.formBrandVehicle"
+          >
+            <div class="centerDiv">
+              <p>{{ title }}</p>
+            </div>
+            <div>
+              <mat-label class="label-input">Marca</mat-label>
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Marca</mat-label>
+                <input matInput appAutofocus placeholder="Marca" formControlName="name" type="text" required
+                  class="inputOutline">
+                <!-- <mat-error
+                      *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+                      Este campo es obligatorio
+                  </mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="container-button-form">
+              <button mat-raised-button color="primary" (click)="brandSave()">
+                <mat-icon fontSet="material-icons-outlined">save</mat-icon>
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="container-logo">
+        <img
+          *ngIf="this.mode !== 'create' && this.mode !== 'edit'"
+          class="w-75 pl-4 mx-auto"
+          src="../../../../../assets/img/logo.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div #target class="container-logo invisible">
+      <img
+        *ngIf="this.mode !== 'create' && this.mode !== 'edit'"
+        class="w-25 pl-4 mx-auto"
+        src="../../../../../assets/img/logo.png"
+        alt=""
+      />
+    </div>
+  </div>
+</div>

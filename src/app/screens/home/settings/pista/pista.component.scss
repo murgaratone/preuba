@@ -1,0 +1,130 @@
+@import "../../../../../themes/theme.scss";
+
+.container-washingTracks-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+
+    .container-grid{
+      width: 100%;
+      @media (min-width: 1080px) {
+          width: 90%;
+        }
+    }
+
+    .table-active {
+        text-align: -webkit-center;
+        padding: 20px;
+        margin-top: 10px;
+        margin-left: 60px;
+
+        @media (max-width: 768px) {
+          margin-left: 0px;
+      }
+
+        .table-active-panel{
+          width: 250px;
+        }
+
+        .container-button-add{
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 10px;
+
+            button{
+                margin-left: 8px;
+                width: 40px;
+            }
+        }
+
+        .title-form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: map-get($theme-default, "primary");
+            line-height: 2rem;
+            margin-right: 60px;
+
+            .mat-icon{
+                font-size: 60px;
+                height: auto;
+                width: 45px;
+                cursor: pointer;
+            }
+            p{
+                margin: 0 0px;
+                font-size: 32px;
+                font-weight: bold;
+            }
+        }
+      }
+
+      .form-active{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 100%;
+        width: 100%;
+
+        .center-form {
+            width: 80%;
+            max-width: 300px;
+
+            @media (min-width: 1080px) {
+                width: 80%;
+                max-width: 400px;
+            }
+
+            @media (max-width: 768px) {
+                width: 90%;
+                max-width: 100%;
+            }
+        }
+
+        .container-status{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container-button-form{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 50px;
+
+            button{
+                width: 125px;
+            }
+        }
+    }
+
+    .container-logo{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+
+      @media (max-width: 768px) {
+        visibility:hidden !important;
+    }
+  }
+}
+
+.centerDiv{
+  display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            color: map-get($theme-default, "primary");
+            margin-bottom: 20px;
+            p{
+              margin: 0 0px;
+              font-size: 21px;
+              font-weight: bold;
+              line-height: 2rem;
+          }
+}
+
+

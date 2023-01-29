@@ -1,0 +1,90 @@
+@import "../../../../../themes/theme.scss";
+
+.container-products {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+
+    .table-historical-product {
+        width: 100%;
+
+        .container-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 20px 0;            
+
+            .title-form {
+                margin-top: -15px;
+                color: map-get($theme-default, "primary");
+                display: flex;
+                align-items: center;
+
+                .mat-icon {
+                    font-size: 60px;
+                    height: auto;
+                    width: 45px;
+                    cursor: pointer;
+                }
+
+                p {
+                    margin: 0 0px;
+                    font-size: 32px;
+                }
+            }        
+        }        
+
+
+        .box-table {
+            margin-top: 10px;
+        }
+
+        .container-new-search {
+            display: flex;
+            align-items: center;
+
+            .container-message {
+                display: flex;
+                justify-content: flex-start;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+    
+            .container-button-search {
+                display: center;
+                justify-content: flex;
+                margin-top: 23px;
+
+                .mat-raised-button {
+                    width: 100%;
+                    min-width: 10px;
+                    max-width: 65px;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                }
+            }
+    
+            .container-button-download {
+                display: flex-end;
+                justify-content: flex;
+                margin-top: 23px;
+                flex: auto;
+    
+                button {
+                    width: 100%;
+                    min-width: 120px;
+                    max-width: 992px;
+                }
+            }
+        }
+
+        @media (max-width: 450px) {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 450px) {
+        margin: 20px;
+    }
+}

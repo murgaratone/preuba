@@ -1,0 +1,96 @@
+<div class="test">
+    <div style="background-color: black;" class="items">
+        <div>
+            <h1 class="white-color"> Antes de iniciar sesión</h1>
+        </div>
+        <div>
+            <img src="../../../assets/img/logo.png" alt="logo" height="100px">
+        </div>
+        <br>
+        <br>
+        <div *ngIf="form">
+            <form #myForm="ngForm" [formGroup]="form">
+                <div class="row justify-content-center" style="margin: 0;">
+                    <div class="col-6">
+                        <mat-label class="label-input">Usuario</mat-label>
+                        <mat-form-field class="col-12" appearance="outline">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput appAutofocus placeholder="Usuario" formControlName="username" type="text"
+                                required class="inputOutline">
+                            <mat-error
+                                *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6">
+                        <mat-label class="label-input">Apellido</mat-label>
+                        <mat-form-field class="col-12 formOutline" appearance="outline">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput placeholder="Apellido" formControlName="lastName" class="inputOutline"
+                                required>
+                            <mat-error
+                                *ngIf="form.get('lastName')?.hasError('required') && form.get('lastName')?.touched">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6">
+                        <button mat-raised-button class="col-6 col-sm-6 col-md-6" color="primary">Enviar</button>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="items">
+        <h1 class="primary-color"> Despues de iniciar sesión</h1>
+        <div class="container-home">
+            <div>
+                <img src="../../../assets/img/logo.png" alt="logo" height="100px">
+            </div>
+            <br>
+            <br>
+            <div *ngIf="form">
+                <form #myForm="ngForm" [formGroup]="form">
+                    <div class="row justify-content-center" style="margin: 0;">
+                        <div class="col-6">
+                            <mat-label class="label-input">Usuario</mat-label>
+                            <mat-form-field class="col-12" appearance="outline">
+                                <mat-label>Usuario</mat-label>
+                                <input matInput appAutofocus placeholder="Usuario" formControlName="username"
+                                    type="text" required class="inputOutline">
+                                <mat-error
+                                    *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-6">
+                            <mat-label class="label-input">Apellido</mat-label>
+                            <mat-form-field class="col-12 formOutline" appearance="outline">
+                                <mat-label>Apellido</mat-label>
+                                <input matInput placeholder="Apellido" formControlName="lastName" class="inputOutline"
+                                    required>
+                                <mat-error
+                                    *ngIf="form.get('lastName')?.hasError('required') && form.get('lastName')?.touched">
+                                    Este campo es requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-6">
+                            <button mat-raised-button class="col-6 col-sm-6 col-md-6" color="primary">Enviar</button>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

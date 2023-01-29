@@ -1,0 +1,80 @@
+@import "../../../../../themes/theme.scss";
+.container-costs {
+    position: relative;
+
+    .menu-costs {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+
+        .menu {
+            padding: 25px;
+            padding-top: 35px;
+            background-color: #E7E6E6;
+            -webkit-box-shadow: 2px 4px 26px 0px rgba(158, 158, 158, 0.73);
+            -moz-box-shadow: 2px 4px 26px 0px rgba(158, 158, 158, 0.73);
+            box-shadow: 2px 4px 26px 0px rgba(158, 158, 158, 0.73);
+            max-width: 210px;
+            width: 210px;
+
+            .close-menu{
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                background-color: map-get($theme-default, "primary");
+                color: white;
+                height: 24px;
+                border-radius: 50%;
+            }
+
+            .button-menu{
+                padding: 10px;
+                padding-inline: 15px;
+                margin-block: 5px;
+                border-color: map-get($theme-default, "primary");
+                border-width: 2px;
+                cursor: pointer;
+                border-style: solid;
+                color: map-get($theme-default, "primary");
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                font-weight: 700;
+
+                .material-icons-outlined{
+                    font-size: 35px;
+                }
+
+                .mat-icon {
+                    width: 35px;
+                    height: 35px;
+                }
+
+                span{
+                    margin-left: 3px;
+                }
+            }
+
+            .button-menu-active{
+                background-color: map-get($theme-default, "primary");
+                border-width: 2px;
+                color: white;
+            }
+
+            .container-items{
+                .list-items{
+                    display: flex;
+                    align-items: flex-start;
+                    cursor: pointer;
+                    color: map-get($theme-default, "primary");
+                    text-decoration: underline;
+
+                    &:hover{
+                        color: map-get($theme-default, "secondary");
+                    }
+                }
+            }
+        }
+    }
+}

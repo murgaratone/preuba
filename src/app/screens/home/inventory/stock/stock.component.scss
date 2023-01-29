@@ -1,0 +1,104 @@
+@import "../../../../../themes/theme.scss";
+
+.container-products {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+
+    .table-active-create {
+        width: 95%;
+
+        .container-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 20px 0;
+
+            .title-form {
+                margin-top: 10px;
+                color: map-get($theme-default, "primary");
+                display: flex;
+                align-items: center;
+
+                .mat-icon {
+                    font-size: 60px;
+                    height: auto;
+                    width: 45px;
+                    cursor: pointer;
+                }
+
+                p {
+                    margin: 0 0px;
+                    font-size: 32px;
+                }
+            }
+        }
+
+        .container-forms-poduct {
+            display: flex;
+            align-items: center;            
+
+            .container-button-save {
+                display: flex;
+                justify-content: flex-end !important;
+
+                .mat-raised-button {
+                    min-width: 10px ;
+                }
+                .mat-button-wrapper {
+                    display: flex !important;
+                    justify-content: center;
+                    align-items: center;
+                }                
+                button {
+                    max-width: 60px !important;
+                    min-width: 40px !important;
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 20px;
+                    
+                    .text-button {
+                        display: none;                        
+                    }
+                }
+            }
+
+            @media (max-width: 795px) and (min-width: 767px) {
+                .label-input.label-name {
+                    font-size: 15px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .container-button-save {         
+                    justify-content: flex-end;
+                    display: flex;
+
+                    button {                    
+                        width: 100%;
+                        max-width: 150px !important;
+                        align-items: center;
+                        justify-content: center;
+                        
+                        .text-button {
+                            display: contents;
+                            align-content: center;
+                        }
+                    }
+                }
+            }
+        }
+
+        .box-table {
+            margin-top: 10px;
+        }        
+
+        @media (max-width: 450px) {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 450px) {
+        margin: 20px;
+    }
+}

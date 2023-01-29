@@ -1,0 +1,15 @@
+<div class="container-home">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav [opened]="configService.menuView" disableClose
+            [mode]="configService.screenWidth <= 660 ? 'over' : 'side'" class="container-menu-home">
+            <app-menu></app-menu>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <app-header-home></app-header-home>
+            <div class="container-pages">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,106 @@
+<div class="container-alarms">
+  <div class="container-alarms-boxes">
+    <div class="container-header">
+      <div class="title-form">
+        <mat-icon (click)="back()" *ngIf="this.mode === 'edit'">chevron_left</mat-icon>
+        <p>{{ title }}</p>
+      </div>
+      <div class="container-button-add" *ngIf="configService.role != configService.partnerUser.key && this.mode !== 'edit'">
+        <button mat-raised-button color="primary" (click)="addAlarmButton()" [disabled]="this.mode === 'create'">
+          <mat-icon>add</mat-icon>
+          Agregar
+        </button>
+      </div>
+    </div>
+    <div *ngIf="this.mode !== 'table'">
+      <div *ngIf="formsAlarmsService.formAlarm" class="container-form">
+        <form #myFormAlarm="ngForm" [formGroup]="formsAlarmsService.formAlarm" class="form-table">
+          <div class="row justify-content-right" style="margin: 0">
+            <div class="col-12 col-md-6 col-lg-3" style="padding-inline: 2px">
+              <mat-label [ngClass]="{
+                      'label-input': !disabled,
+                      'label-input-disabled': disabled
+                    }">Producto</mat-label>
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Producto</mat-label>
+                <mat-select matNativeControl formControlName="name" required class="inputOutline" (selectionChange)="select($event)">
+                  <mat-option *ngFor="let product of formsAlarmsService.productList" [value]="product.id">
+                    {{ product.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="
+                        formsAlarmsService.formAlarm
+                          .get('name')
+                          ?.hasError('required') &&
+                        formsAlarmsService.formAlarm.get('name')?.touched
+                      ">
+                  Este campo es obligatorio
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3" style="padding-inline: 2px">
+              <mat-label class="label-input-disabled">Líquido</mat-label>
+              <mat-form-field class="col-12 formOutline" appearance="outline">
+                <mat-label>Líquido</mat-label>
+                <mat-select matNativeControl formControlName="isLiquid" required class="inputOutline">
+                  <mat-option *ngFor="let isLiquid of formsAlarmsService.isLiquidList" [value]="isLiquid.id">
+                    {{ isLiquid.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3" style="padding-inline: 2px">
+              <mat-label [ngClass]="{
+                      'label-input': !disabled,
+                      'label-input-disabled': disabled
+                    }">Cantidad mínima</mat-label>
+              <mat-form-field class="col-12 formOutline" appearance="outline">
+                <mat-label>Cantidad mínima</mat-label>
+                <input matInput placeholder="Cantidad mínima" formControlName="quantityTrigger" class="inputOutline"
+                  required />
+                <mat-error *ngIf="
+                        formsAlarmsService.formAlarm
+                          .get('quantityTrigger')
+                          ?.hasError('required') &&
+                        formsAlarmsService.formAlarm.get('quantityTrigger')?.touched
+                      ">
+                  Este campo es requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3" style="padding-inline: 2px" *ngIf="this.mode === 'edit'">
+              <mat-label class="label-input-disabled">Estado
+              </mat-label>
+              <mat-form-field class="col-12 formOutline" appearance="outline">
+                <mat-label>Estado</mat-label>
+                <mat-select matNativeControl formControlName="statusProduct" required class="inputOutline">
+                  <mat-option *ngFor="let status of formsAlarmsService.statusList" [value]="status.id">
+                    {{ status.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div class="container-button-form">
+          <button mat-raised-button color="primary" (click)="saveAlarm()" type="submit">
+            <mat-icon>save</mat-icon>
+            <span class="text-button">Guardar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="table-alarms" *ngIf="this.mode !== 'edit'">
+      <app-table [headers]="tableAlarmsService.headers" [data]="tableAlarmsService.data"
+        [actions]="tableAlarmsService.actions"
+        [disableEditItemWithStatus]="false"
+        [totalPages]="tableAlarmsService.totalPages" [actualPage]="tableAlarmsService.actualPage"
+        (delete)="(tableAlarmsService.changeStatusAlarm($event))" (edit)="tableAlarmsService.editAlarm($event)"
+        (view)="tableAlarmsService.viewAlarm($event)" (back)="tableAlarmsService.backPage()"
+        (next)="tableAlarmsService.nextPage()"></app-table>
+    </div>
+  </div>
+</div>

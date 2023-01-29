@@ -1,0 +1,102 @@
+<div class="container-payroll">
+  <div class="table-payroll-create">
+    <div class="col-12">
+      <div class="container-header">
+        <div class="container-price container">
+          <div class="title-form">
+            <mat-icon (click)="back()">chevron_left</mat-icon>
+            <p *ngIf="this.mode === 'table'">{{ title }}</p>
+          </div>
+
+          <div class="row justify-content-right">
+            <div class="col-12 col-sm-6 col-lg-4">
+              <p>
+                <mat-label class="label-input separator">Nombre: </mat-label>
+                <span [ngClass]="{ 'label-input-disabled': true }">{{
+                  payrollView?.name
+                }}</span>
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <p>
+                <mat-label class="label-input separator">Fecha:</mat-label>
+                <span [ngClass]="{ 'label-input-disabled': true }">{{
+                  getFecha()
+                }}</span>
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <p>
+                <mat-label class="label-input separator">Cargo:</mat-label>
+                <span [ngClass]="{ 'label-input-disabled': true }">{{
+                  payrollView?.title
+                }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="row mt-3 mb-3 pt-2 header-subtitle">
+            <p>Detalle del pago</p>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-8">
+              <p>
+                <mat-label class="label-input separator"
+                  >Servicio Pagado:</mat-label
+                >
+                <span [ngClass]="{ 'label-input-disabled': true }">{{ getServicePay()
+
+                }}</span>
+              </p>
+            </div>
+            <div class="col-12 col-md-4">
+              <p>
+                <mat-label class="label-input separator">Valor:</mat-label>
+                <span [ngClass]="{ 'label-input-disabled': true }">{{
+                  payrollView?.amount
+                }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="hr"></div>
+          </div>
+          <div class="container-forms-payroll">
+            <button
+              mat-raised-button
+              class="col-3 col-sm-3 col-lg-2 col-sm-3 col-md-3"
+              color="primary"
+              *ngIf="this.mode === 'view'"
+              type="submit"
+            >
+              <mat-icon>visibility</mat-icon>
+              Ver
+            </button>
+            <button
+              mat-raised-button
+              class="mt-4 col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6"
+              color="primary"
+              type="submit"
+              (click)="priceSave()"
+              *ngIf="this.storageValue?.view === 'create'"
+            >
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+
+            <button
+              mat-raised-button
+              class="mt-4 col-12 col-sm-6 col-lg-4 col-sm-6 col-md-6"
+              color="primary"
+              type="submit"
+              (click)="generatePdf()"
+              *ngIf="this.storageValue?.view === 'view'"
+            >
+              <mat-icon>save</mat-icon>
+              Generar PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

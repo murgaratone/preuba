@@ -1,0 +1,10 @@
+<div class="container-users">
+    <div class="menu-users">
+        <div *ngFor="let item of userMenu.children" [ngClass]="{ 'items': true,  'select': item.select}">
+            <div (click)="changeMenu(item)">{{item.text}}</div>
+        </div>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

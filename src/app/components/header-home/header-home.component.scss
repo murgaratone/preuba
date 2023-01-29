@@ -1,0 +1,76 @@
+@import "../../../themes/theme.scss";
+
+.header-home {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    position: relative;
+    background-color: map-get($theme-default, "gray-dark");
+    color: map-get($theme-default, "white");
+
+    .container-header {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 15px;
+        align-items: center;
+
+        .title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            @media (max-width: 450px) {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        .alerts{
+            display: flex;
+            align-items: center;
+
+            .notifications{
+                margin-left: 5px;
+                position: relative;
+
+                .notification {
+                    position: absolute;
+                    bottom: 2px;
+                    right: 2px;
+                    height: 17px;
+                    width: 17px;
+                    font-size: 10px;
+                    border-radius: 50%;
+                    text-align: center;
+                    font-weight: 500;
+                    background-color: red;
+                    cursor: pointer;
+                }
+            }
+
+            span{
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    .header-home {
+        .container-header {
+            .title {
+                span {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}

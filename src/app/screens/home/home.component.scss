@@ -1,0 +1,32 @@
+@import "../../../themes/theme.scss";
+
+.container-home {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+mat-sidenav {
+  border-right: 1px solid map-get($theme-default, "gray-dark");
+  background-color: map-get($theme-default, "gray-dark");
+}
+
+.container-pages {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: white;
+}
